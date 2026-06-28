@@ -1,0 +1,22 @@
+# Render.com Blueprint — deploys the LeafByte delivery backend.
+# In Render: New → Blueprint → connect the repo containing this folder.
+# Then set the secret env vars (marked sync:false) in the Render dashboard.
+services:
+  - type: web
+    name: leafbyte-delivery
+    runtime: node
+    plan: free
+    rootDir: delivery-backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SHIPROCKET_EMAIL
+        sync: false            # set in dashboard (secret)
+      - key: SHIPROCKET_PASSWORD
+        sync: false            # set in dashboard (secret)
+      - key: SHIPROCKET_PICKUP_LOCATION
+        value: Primary
+      - key: SHIPROCKET_PICKUP_PINCODE
+        value: "335063"
+      - key: ALLOWED_ORIGINS
+        value: https://leafbyt.com,https://www.leafbyt.com
